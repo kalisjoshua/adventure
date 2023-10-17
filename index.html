@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adventure App</title>
+    <script src="strawberry.js"></script>
+  </head>
+
+  <template name="app-root">
+    <section
+      style="background: white; margin: 0 auto; padding: 1px; width: 120ex"
+    >
+      <slot />
+    </section>
+
+    <script>
+      app.updates = {};
+    </script>
+  </template>
+
+  <template name="app-food">
+    <form-field>
+      <dl>
+        <dt>Food</dt>
+        <dd><slot /></dd>
+      </dl>
+      <button onclick="app.food += 1">Grow</button>
+    </form-field>
+
+    <script>
+      app.food = 0;
+      app.updates.food = -1;
+    </script>
+  </template>
+
+  <template name="app-population">
+    <form-field>
+      <dl>
+        <dt>Population</dt>
+        <dd><slot /></dd>
+      </dl>
+    </form-field>
+
+    <script>
+      app.population = 0;
+      //   app.updates.wood = -1;
+    </script>
+  </template>
+
+  <template name="app-wood">
+    <form-field>
+      <dl>
+        <dt>Wood</dt>
+        <dd><slot /></dd>
+      </dl>
+      <button onclick="app.wood += 1">Chop</button>
+    </form-field>
+
+    <script>
+      app.wood = 0;
+      app.updates.wood = -1;
+    </script>
+  </template>
+
+  <template name="form-field">
+    <div>
+      <slot />
+    </div>
+  </template>
+
+  <script>
+    const app = sb.init();
+
+    function gameLoop() {
+      for (prop in app.updates) {
+        app[prop] = Math.max(0, app[prop] + app.updates[prop]);
+      }
+
+      setTimeout(gameLoop, 1000);
+    }
+
+    gameLoop();
+  </script>
+
+  <body style="background: gainsboro; margin: 0; padding: 0">
+    <app-root>
+      <app-food sb-mark="food"></app-food>
+      <app-wood sb-mark="wood"></app-wood>
+      <app-population sb-mark="population"></app-population>
+    </app-root>
+  </body>
+</html>
