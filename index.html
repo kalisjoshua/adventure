@@ -8,7 +8,7 @@
     <script src="strawberry.js"></script>
   </head>
 
-  <template name="app-root">
+  <template name="c-root">
     <section
       style="background: white; margin: 0 auto; padding: 1px; width: 120ex"
     >
@@ -20,7 +20,7 @@
     </script>
   </template>
 
-  <template name="app-food">
+  <template name="c-food">
     <form-field>
       <dl>
         <dt>Food</dt>
@@ -35,7 +35,7 @@
     </script>
   </template>
 
-  <template name="app-population">
+  <template name="c-population">
     <form-field>
       <dl>
         <dt>Population</dt>
@@ -45,11 +45,10 @@
 
     <script>
       app.population = 0;
-      //   app.updates.wood = -1;
     </script>
   </template>
 
-  <template name="app-wood">
+  <template name="c-wood">
     <form-field>
       <dl>
         <dt>Wood</dt>
@@ -74,7 +73,7 @@
     const app = sb.init();
 
     function gameLoop() {
-      for (prop in app.updates) {
+      for (let prop in app.updates) {
         app[prop] = Math.max(0, app[prop] + app.updates[prop]);
       }
 
@@ -85,10 +84,10 @@
   </script>
 
   <body style="background: gainsboro; margin: 0; padding: 0">
-    <app-root>
-      <app-food sb-mark="food"></app-food>
-      <app-wood sb-mark="wood"></app-wood>
-      <app-population sb-mark="population"></app-population>
-    </app-root>
+    <c-root>
+      <c-food sb-mark="food"></c-food>
+      <c-wood sb-mark="wood"></c-wood>
+      <c-population sb-mark="population"></c-population>
+    </c-root>
   </body>
 </html>
