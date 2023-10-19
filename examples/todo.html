@@ -1,0 +1,45 @@
+<!DOCTYPE html />
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adventure</title>
+  </head>
+  <body>
+    <script type="module">
+      import { domaddic } from "../domaddic.mjs";
+
+      const todo = domaddic({
+        add({ items }) {
+          return `
+            <h4>TODO</h4>
+            <form>
+              ${List({ items })}
+              <input name="newTodo" />
+              <button>Add #${items.length + 1}</button>
+            </form>`;
+        },
+        afterAdd(state, parent, update) {
+          parent.querySelector("form").addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const text = event.target.newTodo.value.trim();
+
+            if (text) {
+              state.items.push({ text });
+              update(() => parent.querySelector("input").focus());
+            }
+          });
+        },
+      });
+
+      function List({ items }) {
+        return `<ol>${items
+          .map((item) => `<li>${item.text}</li>`)
+          .join("")}</ol>`;
+      }
+
+      todo({ items: [] });
+    </script>
+  </body>
+</html>
