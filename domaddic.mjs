@@ -14,67 +14,9 @@
  * @param {AfterAddFn} [config.afterAdd] - the function to run after the
  * component has been inserted into the DOM; enables adding event handlers to
  * elements of the component
- * @param {Element} [config.mountPoint] - the position in the DOM where the
+ * @param {() => Element} [config.mountPoint] - the position in the DOM where the
  * component will be inserted; defaults to `document.body`
  * @returns {WriteFn} factory function for creating instances of the component
- *
- * @example
- * ```javascript
- * // Simple age incrementer
- * import { domaddic } from "domaddic.mjs";
- *
- * const age = domaddic({
- *   add(state, write) {
- *     state.age = state.age || 0;
- *
- *     setTimeout(() => {
- *       state.age += 1;
- *       write();
- *     }, 1000);
- *
- *     return `${state.name} is ${state.age} years old.`;
- *   },
- * });
- *
- * age({ name: "Child" });
- * age({ age: 30, name: "Parent" });
- * ```
- *
- * @example
- * ```javascript
- * // Basic To Do list
- * import { domaddic } from "domaddic.mjs";
- *
- * const todo = domaddic({
- *   add({ items }) {
- *     return `
- *       <h4>TODO</h4>
- *       <form>
- *         ${List({ items })}
- *         <input name="newTodo" />
- *         <button>Add #${items.length + 1}</button>
- *       </form>`;
- *   },
- *   afterAdd(state, parent, update) {
- *     parent.querySelector("form").addEventListener("submit", (event) => {
- *       event.preventDefault();
- *
- *       const text = event.target.newTodo.value.trim();
- *
- *       if (text) {
- *         state.items.push({ text });
- *         update(state, () => parent.querySelector("input").focus());
- *       }
- *     });
- *   },
- * });
- *
- * function List({ items }) {
- *   return `<ol>${items.map((item) => `<li>${item.text}</li>`).join("")}</ol>`;
- * }
- *
- * todo({ items: [] });
- * ```
  *
  * inspired by:
  *   - [HEX](https://medium.com/@metapgmr/hex-a-no-framework-approach-to-building-modern-web-apps-e43f74190b9c)
@@ -94,7 +36,7 @@ function domaddic(config) {
   return (state) => {
     const div = document.createElement("DIV");
 
-    (mountPoint ?? document.body).appendChild(div);
+    (mountPoint() ?? document.body).appendChild(div);
 
     function write(onUpdate) {
       new MutationObserver((mutationList, observer) => {

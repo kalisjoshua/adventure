@@ -1,6 +1,4 @@
-import { domaddic } from "./domaddic.mjs";
-
-const clicky = domaddic({
+const clicky = {
   add(state, write) {
     state.count = state.count || 0;
 
@@ -10,11 +8,9 @@ const clicky = domaddic({
     }, 1000);
 
     return `
-      <dl data-pending="${pending}">
-        <dt>${state.label}</dt>
-        <dd>${state.count}</dd>
-      </dl>
-      <button id="${state.action}-${state.label}">${state.action}</button>
+      <button class="bg-teal-900 border-solid border-2 border-teal-900 px-3 py-1 rounded-md text-white" id="${state.action}-${state.label}">${state.action}</button>
+      <label data-pending="${pending}" for="${state.label}-value">${state.label}</label>
+      <input class="border-solid border-2 border-slate-200 px-3 py-1 rounded-md w-16" disabled id="${state.label}-value" name="${state.label}-value" value="${state.count}" />
     `;
   },
   afterAdd(state, parent, write) {
@@ -26,6 +22,6 @@ const clicky = domaddic({
         write();
       });
   },
-});
+};
 
 export { clicky };
