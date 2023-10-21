@@ -1,47 +1,16 @@
-import { domaddic } from "../domaddic.mjs";
+import { Attollere } from "/Attollere.mjs";
+import { food } from "/src/food.mjs";
+import { population } from "/src/population.mjs";
+import { wood } from "/src/wood.mjs";
 
-import { clicky } from "./clicky.mjs";
+window.addEventListener("DOMContentLoaded", () => {
+  console.clear();
+  const app = new Attollere();
 
-const appState = {
-  food: {
-    action: "Cook",
-    count: 0,
-    label: "Food",
-  },
-  people: {
-    action: "Recruit",
-    count: 0,
-    label: "People",
-  },
-  wood: {
-    action: "Chop",
-    count: 0,
-    label: "Wood",
-  },
-};
-
-domaddic({
-  add() {
-    return `
-      <ul> ${[
-        //
-        "food",
-        "wood",
-        appState.food.count > 20 && appState.wood.count > 20 ? "people" : "",
-      ]
-        .filter(Boolean)
-        .map((s) => `<li class="py-2" data-component="${s}"></li>`)
-        .join("")} <ul>
-    `;
-  },
-  afterAdd() {
-    const components = Array.from(document.querySelectorAll("[data-component"));
-
-    components.forEach((el) => {
-      domaddic({ ...clicky, mountPoint: () => el })(
-        appState[el.dataset.component],
-      );
-    });
-  },
-  mountPoint: () => document.querySelector("#app"),
-})(appState);
+  app
+    //
+    .add(food)
+    .add(population)
+    .add(wood)
+    .start({});
+});

@@ -6,13 +6,35 @@
     <title>Vanquish</title>
 
     <base href="vanquish/" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      [data-unit] {
+        visibility: hidden;
+      }
+    </style>
   </head>
   <body class="bg-white container flex flex-col mx-auto p-5">
     <h1 class="text-4xl">Vanquish</h1>
     <hr class="m-6" />
 
-    <article class="grow" id="app"></article>
+    <main class="grow" data-app>
+      <div data-unit="food">
+        <button>Cook</button>
+        <label for="food">Food</label>
+        <input disabled id="food" name="food" />
+      </input>
+
+      <div data-unit="wood">
+        <button>Chop</button>
+        <label for="wood">Wood</label>
+        <input disabled id="wood" name="wood" />
+      </div>
+
+      <div data-unit="population">
+        <button disabled>Hire</button>
+        <label for="population">Population</label>
+        <input disabled id="population" name="population" />
+      </div>
+    </main>
 
     <footer class="mt-auto text-xs">
       <hr class="m-6" />
@@ -24,8 +46,7 @@
       on GitHub
     </footer>
 
-    <script type="module">
-      import "/src/app.mjs";
-    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/src/app.mjs" type="module"></script>
   </body>
 </html>
