@@ -1,27 +1,59 @@
 <!DOCTYPE html />
-<html class="bg-pink-950" lang="en">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vanquish</title>
 
-    <base href="vanquish/" />
+    <base href="/vanquish" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.classless.min.css"
+    />
+
     <style>
+      :root {
+        --form-element-spacing-vertical: 1px;
+      }
+
+      body > footer,
+      body > header,
+      body > main {
+        /* --block-spacing-horizontal: 0; */
+        --block-spacing-vertical: 0;
+      }
+
       [data-unit] {
+        clear: both;
+        display: flex;
         visibility: hidden;
+      }
+
+      [data-unit] button {
+        width: 8em;
+      }
+
+      [data-unit] input {
+        width: 6em;
+      }
+
+      [data-unit] label {
+        flex-grow: 1;
+        padding: 1em;
       }
     </style>
   </head>
-  <body class="bg-white container flex flex-col mx-auto p-5">
-    <h1 class="text-4xl">Vanquish</h1>
-    <hr class="m-6" />
-
-    <main class="grow" data-app>
+  <body>
+    <header>
+      <h1>Vanquish</h1>
+    </header>
+    <main data-app>
       <div data-unit="food">
         <button>Cook</button>
         <label for="food">Food</label>
         <input disabled id="food" name="food" />
-      </input>
+      </div>
 
       <div data-unit="wood">
         <button>Chop</button>
@@ -30,23 +62,20 @@
       </div>
 
       <div data-unit="population">
-        <button disabled>Hire</button>
+        <button disabled>Recruit</button>
         <label for="population">Population</label>
         <input disabled id="population" name="population" />
       </div>
     </main>
 
-    <footer class="mt-auto text-xs">
-      <hr class="m-6" />
+    <footer>
+      <hr />
 
       See the code for
-      <a class="underline" href="https://github.com/kalisjoshua/vanquish"
-        >Vanquish</a
-      >
+      <a href="https://github.com/kalisjoshua/vanquish">Vanquish</a>
       on GitHub
     </footer>
 
-    <script src="https://cdn.tailwindcss.com"></script>
     <script src="/src/app.mjs" type="module"></script>
   </body>
 </html>
