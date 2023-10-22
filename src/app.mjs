@@ -1,7 +1,7 @@
-import { Attollere } from "/Attollere.mjs";
-import { food } from "/src/food.mjs";
-import { population } from "/src/population.mjs";
-import { wood } from "/src/wood.mjs";
+import { Attollere } from "../Attollere.mjs";
+import { food } from "./food.mjs";
+import { population } from "./population.mjs";
+import { wood } from "./wood.mjs";
 
 window.addEventListener("DOMContentLoaded", () => {
   console.clear();
