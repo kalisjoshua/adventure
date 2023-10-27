@@ -1,0 +1,23 @@
+{
+  "name": "prosper",
+  "version": "0.1.0",
+  "description": "a browser clicky game",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server",
+    "test": "node --test --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kalisjoshua/prosper.git"
+  },
+  "author": "Joshua T Kalis <kalisjoshua@gmail.com> (https://kalisjoshua.me/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kalisjoshua/prosper/issues"
+  },
+  "homepage": "https://github.com/kalisjoshua/prosper#readme",
+  "engines": {
+    "node": ">=21.1.0"
+  }
+}

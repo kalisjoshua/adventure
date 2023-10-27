@@ -11,5 +11,6 @@ export function wood(unit, state) {
 
   return (state) => {
     state.wood = Math.max(0, state.wood - 1);
+    valueElement.value = state.wood;
   };
 }

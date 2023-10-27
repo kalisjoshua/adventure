@@ -11,5 +11,6 @@ export function food(unit, state) {
 
   return (state) => {
     state.food = Math.max(0, state.food - 1);
+    valueElement.value = state.food;
   };
 }
