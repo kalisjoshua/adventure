@@ -43,4 +43,14 @@ describe("observable", () => {
 
     assert.equal(called, true);
   });
+
+  it("should read object properties", () => {
+    const [obj] = observable({ foo: { bar: "baz" } });
+
+    assert.equal(obj.foo.bar, "baz");
+
+    obj.foo.bar = "test";
+
+    assert.equal(obj.foo.bar, "test");
+  });
 });

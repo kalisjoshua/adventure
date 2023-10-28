@@ -17,8 +17,7 @@
    - Rot
 6. Currency
    - Reputation
-   - Influence
-   - Force
+   - Influence - Force
 7. Explore
 
 ---

@@ -1,15 +1,19 @@
-import { Attollere } from "../Attollere.mjs";
+import { attollere } from "./lib/attollere.mjs";
+import { observable } from "./lib/observable.mjs";
+
 import { food } from "./food.mjs";
 import { population } from "./population.mjs";
 import { wood } from "./wood.mjs";
 
 window.addEventListener("DOMContentLoaded", () => {
-  const app = new Attollere();
-
-  app
+  attollere(
     //
-    .add(food)
-    .add(population)
-    .add(wood)
-    .start({});
+    food,
+    population,
+    wood,
+  )
+    .state(...observable({ updateTick: 1000 }))
+    .start((state, update) => {
+      setTimeout(update, state.updateTick);
+    });
 });
